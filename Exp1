@@ -1,0 +1,30 @@
+def find_s_algorithm(dataset):
+    # Step 1: Initialize hypothesis as the most specific
+    hypothesis = ["0", "0", "0", "0", "0", "0"]
+    print("Initial Hypothesis:", hypothesis)
+    # Step 2: Iterate through each training example
+    for example in dataset:
+        attributes = example[:-1]      # all columns except last
+        label = example[-1]            # last column (Yes/No)
+        # Only learn from positive examples
+        if label == "Yes":
+            print("\nPositive Example Found:", attributes)
+
+            # Update hypothesis
+            for i in range(len(hypothesis)):
+                if hypothesis[i] == "0":  
+                    hypothesis[i] = attributes[i]
+                elif hypothesis[i] != attributes[i]:
+                    hypothesis[i] = "?"   # generalize
+
+            print("Updated Hypothesis:", hypothesis)
+    return hypothesis
+training_data = [
+    ["Sunny", "Warm", "Normal", "Strong", "Warm", "Same", "Yes"],
+    ["Sunny", "Warm", "High",   "Strong", "Warm", "Same", "Yes"],
+    ["Rainy", "Cold", "High",   "Strong", "Warm", "Change", "No"],
+    ["Sunny", "Warm", "High",   "Strong", "Cool", "Change", "Yes"]
+]
+# Run FIND-S
+final_hypothesis = find_s_algorithm(training_data)
+print("\nFinal Hypothesis:", final_hypothesis)
