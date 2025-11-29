@@ -9,8 +9,6 @@ def find_s_algorithm(dataset):
         # Only learn from positive examples
         if label == "Yes":
             print("\nPositive Example Found:", attributes)
-
-            # Update hypothesis
             for i in range(len(hypothesis)):
                 if hypothesis[i] == "0":  
                     hypothesis[i] = attributes[i]
@@ -28,3 +26,6 @@ training_data = [
 # Run FIND-S
 final_hypothesis = find_s_algorithm(training_data)
 print("\nFinal Hypothesis:", final_hypothesis)
+
+
+
