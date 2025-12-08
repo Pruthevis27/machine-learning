@@ -1,0 +1,25 @@
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+from sklearn.linear_model import LogisticRegression
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.naive_bayes import GaussianNB
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.svm import SVC
+iris = load_iris()
+X = iris.data
+y = iris.target
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+models = {
+    "Logistic Regression": LogisticRegression(max_iter=300),
+    "KNN (k=3)": KNeighborsClassifier(n_neighbors=3),
+    "Naive Bayes": GaussianNB(),
+    "Decision Tree": DecisionTreeClassifier(),
+    "SVM": SVC()
+}
+print("\nModel Performance Comparison:\n")
+for name, model in models.items():
+    model.fit(X_train, y_train)      # Train model
+    y_pred = model.predict(X_test)   # Predict test set
+    acc = accuracy_score(y_test, y_pred)
+    print(f"{name} Accuracy: {acc * 100:.2f}%")
